@@ -37,10 +37,11 @@ d_display *d_new(int width, int height, const char title[]){
     return d;
 }
 
-void d_free(d_display *d){
+void d_destroy(d_display *d){
     SDL_GL_DeleteContext(d->context);
     SDL_DestroyWindow(d->window);
     SDL_Quit();
+    free(d);
 }
 
 void d_update(d_display *d){
