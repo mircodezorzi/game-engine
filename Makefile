@@ -4,19 +4,19 @@
 CC := clang
 
 # set the compiler flags
-CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -Wall -lSDL2_image -lglut -lGL -lGLEW -lm
+CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -lglut -lGL -lGLU -lGLEW -lm
 
 # add header files here
 HDRS :=
 
 # add source files here
-SRCS := opengl.c display.c
+SRCS := main.c display.c shader.c mesh.c texture.c stb_image.c
 
 # generate names of object files
 OBJS := $(SRCS:.c=.o)
 
 # name of executable
-EXEC := game
+EXEC := program
 
 # default recipe
 all: $(EXEC)
