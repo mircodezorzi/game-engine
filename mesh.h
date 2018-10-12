@@ -26,6 +26,7 @@ typedef struct{
     enum{
         POSITION_VB,
         TEXTCORD_VB,
+        INDEX_VB,
         NUM_BUFFERS
     };
     GLuint VAO;
@@ -33,7 +34,7 @@ typedef struct{
     unsigned int draw_count;
 } m_mesh;
 
-m_mesh *m_new(vertex *[], unsigned int);
+m_mesh *m_new(vertex *[], unsigned int, unsigned int *, unsigned int);
 void    m_destroy(m_mesh *);
 
 void m_draw(m_mesh *);

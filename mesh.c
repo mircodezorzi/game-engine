@@ -25,9 +25,9 @@ vertex *vertex_new(float x, float y, float z, float m, float n){
     return v;
 }
 
-m_mesh *m_new(vertex *verticies[], unsigned int vertex_count){
+m_mesh *m_new(vertex *verticies[], unsigned int vertex_count, unsigned int *indicies, unsigned int indicies_count){
     m_mesh *m = malloc(sizeof(m_mesh));
-    m->draw_count = vertex_count;
+    m->draw_count = indicies_count;
 
     glGenVertexArrays(1, &m->VAO);
     glBindVertexArray(m->VAO);
@@ -55,6 +55,9 @@ m_mesh *m_new(vertex *verticies[], unsigned int vertex_count){
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->VAB[INDEX_VB]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicies_count * sizeof(indicies[0]), indicies, GL_STATIC_DRAW);
+
     glBindVertexArray(0);
 
     return m;
@@ -67,6 +70,6 @@ void m_destroy(m_mesh *m){
 
 void m_draw(m_mesh *m){
     glBindVertexArray(m->VAO);
-    glDrawArrays(GL_TRIANGLES, 0, m->draw_count);
+    glDrawElements(GL_TRIANGLES, m->draw_count, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
