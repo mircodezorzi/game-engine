@@ -17,8 +17,8 @@ window_t* window_new(
         unsigned int,
         const char *,
         void (*)(SDL_Event));
-void       window_destroy(window_t *);
-void       window_update(window_t *);
-void       window_fill(float, float, float, float);
+void window_destroy(window_t *);
+void window_update(window_t *);
+void window_fill(float, float, float, float);
 
 #endif

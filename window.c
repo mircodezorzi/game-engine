@@ -68,7 +68,6 @@ void window_update(window_t *w){
         }
 
     (*w->event_callback)(event);
-
 }
 
 void window_fill(float r, float g, float b, float a){
