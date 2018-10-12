@@ -1,44 +1,38 @@
-#include "display.h"
+#include "window.h"
 #include "shader.h"
 #include "mesh.h"
 #include "texture.h"
 
-#include <GL/glew.h>
+#include "sprite.h"
+
+#include <SDL2/SDL.h>
+void input(SDL_Event event){
+    while(SDL_PollEvent(&event))
+        switch(event.type){
+            default:
+                break;
+        }
+}
 
 int main(void){
 
-    vertex *verticies[3] = {
-        vertex_new(-0.5, -0.5, 0.0, 0.0, 0.0),
-        vertex_new( 0.0,  0.5, 0.0, 0.5, 1.0),
-        vertex_new( 0.5, -0.5, 0.0, 1.0, 0.0)
-    };
-
-    d_display *d = d_new(640, 480, "Game");
+    window_t *w = window_new(800, 600, "engine", input);
     s_shader  *s = s_new("shader");
-    m_mesh    *m = m_new(verticies, 3);
-    t_texture *t = t_new("bricks.jpg");
 
-    while(!d->close_request){
-          d_clear(0.0f, 0.15f, 0.3f, 1.0f);
+    glViewport(10,20,500,500);
 
+    sprite_t *player = sprite_new(vec2_new(0, 0), vec2_new(1, 1), 1, "bricks.jpg");
 
-
-
-    float timeValue = 1;
-    float greenValue = sin(timeValue) / 2.0f + 0.5f;
-    int vertexColorLocation = glGetUniformLocation(s->shader_program, "diffuse");
-    glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
+    while(!w->close_request){
+          window_fill(0.0f, 0.15f, 0.3f, 1.0f);
 
           s_bind(s);
-          t_bind(t, 0);
-          m_draw(m);
-          d_update(d);
+          sprite_draw(player);
+          window_update(w);
     }
 
-    d_destroy(d);
+    sprite_destroy(player);
     s_destroy(s);
-    m_destroy(m);
-    t_destroy(t);
+    window_destroy(w);
 
 }

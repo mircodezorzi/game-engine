@@ -10,7 +10,7 @@ CFLAGS := `sdl2-config --libs --cflags` -ggdb3 -O0 --std=c99 -lglut -lGL -lGLU -
 HDRS :=
 
 # add source files here
-SRCS := main.c display.c shader.c mesh.c texture.c stb_image.c
+SRCS := main.c window.c shader.c mesh.c texture.c sprite.c stb_image.c
 
 # generate names of object files
 OBJS := $(SRCS:.c=.o)

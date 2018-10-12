@@ -7,8 +7,8 @@ s_shader* s_new(const char filepath[]){
     s_shader *s = malloc(sizeof(s_shader));
 
     s->shader_program = glCreateProgram();
-    s->shaders[0] = s_create(s_load("shader.vs"), GL_VERTEX_SHADER);
-    s->shaders[1] = s_create(s_load("shader.fs"), GL_FRAGMENT_SHADER);
+    s->shaders[0] = s_create(s_load("shader.vs.old"), GL_VERTEX_SHADER);
+    s->shaders[1] = s_create(s_load("shader.fs.old"), GL_FRAGMENT_SHADER);
 
     for(unsigned int i = 0; i < NUM_SHADERS; i++)
         glAttachShader(s->shader_program, s->shaders[i]);
